@@ -1,47 +1,34 @@
-{% extends "base_generic.html" %}
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-
-<html lang="en">
-<head>
-    <title>The Do Club - San Francisco</title>
-    
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8" />
-    <link rel="stylesheet" href="/static/css/master.css" type="text/css" media="screen" charset="utf-8" />
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>The Do Club</h1>
-            <nav>
-                <ul>
-                    <li><a href="/#upcoming">Upcoming</a></li>
-                    <li><a href="/#present">Present</a></li>
-                    <li><a href="/#changelog">Changelog</a></li>
-                </ul>
-            </nav>
-        </header>
-        <article>
-            <h2 class="hide">Upcoming</h2>
-            <a id="upcoming"></a>
-            <p>The do club is a meetup for people who code interesting things. Meet like-minded people, learn about great open source projects and eat well.</p>
-            <h3>Next club: 1st February 2012</h3>
-            
-        </article>
-        <article>
-            <a id="present"></a>
-            <form method="post" action="{% url presentation-create %}">
-                {% csrf_token %}
-                <input type="submit" value="Present" class="btn" />
-            </form>
-        </article>
-        <article>
-            <a id="changelog"></a>
-            
-        </article>
-    </div>
-
-    <script src="/static/js/bootstrap.min.js" charset="utf-8"></script>
-    <script src="/static/js/homepage.js" charset="utf-8"></script>
-</body>
-</html>
+{% block content %}
+<div class="container">
+    <header>
+        <h1>The Do Club</h1>
+        <nav>
+            <ul>
+                <li><a href="/#upcoming">Upcoming</a></li>
+                <li><a href="/#present">Present</a></li>
+                <li><a href="/#changelog">Changelog</a></li>
+            </ul>
+        </nav>
+    </header>
+    <article>
+        <h2 class="hide">Upcoming</h2>
+        <a id="upcoming"></a>
+        <p>The do club is a meetup for people who code interesting things. Meet like-minded people, learn about great open source projects and eat well.</p>
+        <h3>Next club: 1st February 2012</h3>
+        
+    </article>
+    <article>
+        <a id="present"></a>
+        <form method="post" action="{% url presentation-create %}">
+            {% csrf_token %}
+            <input type="submit" value="Present" class="btn" />
+        </form>
+    </article>
+    <article>
+        <a id="changelog"></a>
+        
+    </article>
+</div>
+{% endblock content %}
