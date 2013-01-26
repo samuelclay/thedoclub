@@ -49,4 +49,47 @@ class GitHubUser(models.Model):
         self.public_repos = user['public_repos']
         
         self.save()
+    
+    def fetch_repos(self):
+        gh = self.gh()
+        user_repos = gh.user.repos.get()
+        
+        GitHubRepo.create(self, user_repos)
+        orgs = gh.user.orgs.get()
+        for org in orgs:
+            org_repos = gh.orgs(org['login']).repos.get()
+            GitHubRepo.create(self, org_repos, org=org)
 
+class GitHubRepo(models.Model):
+    user = models.ForeignKey(GitHubUser, related_name='repos')
+    organization_id = models.IntegerField(null=True)
+    organization_name = models.CharField(max_length=255, null=True)
+    description = models.CharField(max_length=1024, null=True)
+    html_url = models.CharField(max_length=1024, null=True)
+    repo_id = models.IntegerField(null=True)
+    name = models.CharField(max_length=255, null=True)
+    watchers = models.IntegerField(null=True)
+    forks = models.IntegerField(null=True)
+    
+    @classmethod
+    def create(cls, user, repos, org=None):
+        org_name = None
+        org_id = None
+        if org:
+            org_name = org['login']
+            org_id = org['id']
+            
+        for repo in repos:
+            cls.objects.get_or_create(defaults={
+                "description": repo['description'],
+                "html_url": repo['html_url'],
+                "watchers": repo['watchers'],
+                "forks": repo['forks'],
+            }, **{
+                "user": user,
+                "organization_id": org_id,
+                "organization_name": org_name,
+                "repo_id": repo['id'],
+                "name": repo['name'],
+            })
+    

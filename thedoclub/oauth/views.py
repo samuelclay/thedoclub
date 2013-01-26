@@ -33,6 +33,7 @@ def callback(request):
     
     user, _ = GitHubUser.objects.get_or_create(access_token=access_token)
     user.fetch_user_info()
+    # user.fetch_repos()
     
     next = request.COOKIES.get('oauth_next', '/')
     return HttpResponseRedirect(next)
