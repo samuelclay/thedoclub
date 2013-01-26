@@ -1,3 +1,4 @@
 Django==1.4.3
 MySQL-python==1.2.4
+py-bcrypt==0.2
 wsgiref==0.1.2
