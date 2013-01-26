@@ -3,10 +3,10 @@
 {% block content %}
 <div class="container">
     <header class="row heading">
-        <div class="span3">
-            <img src="/static/img/do-128.png" />
+        <div class="span5">
+            <img src="/static/img/do-256.png" width="128" height="128" />
         </div>
-        <nav class="span9">
+        <nav class="span7">
             <ul>
                 <li><a href="/#upcoming">Upcoming</a></li>
                 <li><a href="/#present">Present</a></li>
@@ -17,20 +17,37 @@
     <article class="upcoming">
         <h2 class="hide">Upcoming</h2>
         <a id="upcoming"></a>
-        <p class="what">The do club is a meetup for people who code interesting things. Meet like-minded people, learn about great open source projects and eat well.</p>
-        <h3>Next club: 1st February 2012</h3>
-            
+        <p class="what">The Do Club is a meetup for people who code interesting things to present and gain recognition. Come along, meet like-minded people, learn about great open source projects and eat well.</p>
+        
+        <div class="row">
+            <div class="span5">
+                <h3>Next club: 1st February 2012</h3>
+                <h4>at Google San Francisco</h4>
+                
+                <a href="/" class="btn btn-primary btn-large">I'll Be There!</a>
+                <p class="note">(Sign in with Github)</p>
+            </div>
+            <div class="span7">
+                
+            </div>
+        </div>
+        
     </article>
     <article class="present">
+        <h2>Present</h2>
         <a id="present"></a>
+        
+        <p class="what">Want to present at the next meetup? Each presentation is around 10 minutes (5 slides) and we've made it as easy as possible to take part. Get recognition, contributors, fame and fortune.</p>
         <form method="post" action="{% url presentation-create %}">
             {% csrf_token %}
-            <input type="submit" value="Present" class="btn" />
+            <input type="submit" value="Present" class="btn btn-primary btn-large" />
         </form>
     </article>
     <article>
+        <h2>Changelog</h2>
         <a id="changelog"></a>
-            
+        
+        <h3>2013.02.01</h3>
     </article>
 </div>
 {% endblock content %}
