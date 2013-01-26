@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'homepage.views.home', name='home'),
     url(r'^presentation/create/?', 'presentation.views.create', name='presentation-create'),
+    url(r'^presentation/(?P<presentation_uuid>\w+)/choose/?', 'presentation.views.choose', name='presentation-choose'),
     url(r'^presentation/(?P<presentation_uuid>\w+)/edit/?', 'presentation.views.edit', name='presentation-edit'),
     url(r'^presentation/(?P<presentation_uuid>\w+)/?', 'presentation.views.view', name='presentation-view'),
     url(r'^oauth/authorize/?', 'oauth.views.authorize', name='oauth-authorize'),

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+Choose: 
+
+<div class="repos">
+    {% for repo in ghuser.repos.all %}
+        <div class="repo">
+            <div class="repo-org">{{ repo.organization_name }}</div>
+            <div class="repo-name">{{ repo.name }}</div>
+            <img src="{{ repo.avatar_url }}">
+        </div>
+    {% endfor %}
+</div>
+    
+{% endblock %}

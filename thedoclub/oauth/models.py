@@ -1,4 +1,5 @@
 import bcrypt
+import datetime
 from django.db import models
 from vendor.github import GitHub
 
@@ -18,7 +19,11 @@ class GitHubUser(models.Model):
     login = models.CharField(max_length=40, null=True)
     name = models.CharField(max_length=128, null=True)
     public_repos = models.IntegerField(null=True)
-    
+    repo_refresh_date = models.DateTimeField(null=True)
+
+    def __unicode__(self):
+        return "%s" % (self.login)
+        
     def save(self, *args, **kwargs):
         if not self.secret_token:
             self.secret_token = self.generate_secret_token()
@@ -50,9 +55,16 @@ class GitHubUser(models.Model):
         
         self.save()
     
-    def fetch_repos(self):
+    def fetch_repos(self, force=False):
         gh = self.gh()
+        
+        day_ago = datetime.datetime.now() - datetime.timedelta(days=1)
+        if not force and self.repo_refresh_date and self.repo_refresh_date > day_ago:
+            return
+
         user_repos = gh.user.repos.get()
+        self.repo_refresh_date = datetime.datetime.now()
+        self.save()
         
         GitHubRepo.create(self, user_repos)
         orgs = gh.user.orgs.get()
@@ -64,27 +76,34 @@ class GitHubRepo(models.Model):
     user = models.ForeignKey(GitHubUser, related_name='repos')
     organization_id = models.IntegerField(null=True)
     organization_name = models.CharField(max_length=255, null=True)
+    avatar_url = models.CharField(max_length=1024, null=True)
     description = models.CharField(max_length=1024, null=True)
     html_url = models.CharField(max_length=1024, null=True)
     repo_id = models.IntegerField(null=True)
     name = models.CharField(max_length=255, null=True)
     watchers = models.IntegerField(null=True)
     forks = models.IntegerField(null=True)
-    
+
+    def __unicode__(self):
+        return "[%s] %s (%s/%s)" % (self.organization_name if self.organization_name else "---",
+                                    self.name, self.watchers, self.forks)
+        
     @classmethod
     def create(cls, user, repos, org=None):
+        avatar_url = user.avatar_url
         org_name = None
         org_id = None
         if org:
             org_name = org['login']
             org_id = org['id']
-            
+            avatar_url = org['avatar_url']
         for repo in repos:
             cls.objects.get_or_create(defaults={
                 "description": repo['description'],
                 "html_url": repo['html_url'],
                 "watchers": repo['watchers'],
                 "forks": repo['forks'],
+                "avatar_url": avatar_url,
             }, **{
                 "user": user,
                 "organization_id": org_id,
