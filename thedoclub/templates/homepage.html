@@ -15,8 +15,8 @@
         </nav>
     </header>
     <section class="upcoming">
-        <h2 class="hide">Upcoming</h2>
         <a id="upcoming"></a>
+        <h2 class="hide">Upcoming</h2>
         <p class="what">The Do Club is a meetup for people who code interesting things to present their work and gain recognition. Come along, meet like-minded folk and learn about great open source projects big &amp; small.</p>
         
         <div class="row">
@@ -25,7 +25,7 @@
                 <h4>at Google San Francisco</h4>
                 
                 <a href="/" class="btn btn-primary btn-large">I'll Be There!</a>
-                <p class="note">(Sign in with Github)</p>
+                <p class="note">(You'll need to sign in with Github)</p>
             </div>
             <div class="span7">
                 <ul class="attendees">
@@ -73,33 +73,39 @@
         
     </section>
     <section class="present">
-        <h2>Present</h2>
         <a id="present"></a>
+        <h2>Present</h2>
         <p class="what">Got something to show off at the next event? Each presentation is around 10 minutes <strong>(5 slides)</strong> and we've made it as easy as possible to take part - don't worry if you've never presented anything before!</p>
         
         <form method="post" action="{% url presentation-create %}">
             {% csrf_token %}
-            <input type="submit" value="Present" class="btn btn-primary btn-large" />
+            <input type="submit" value="Present Your Project" class="btn btn-primary btn-large" />
+            <p class="note">(You'll need to sign in with Github)</p>
         </form>
     </section>
     <section class="changelog">
-        <h2>Changelog</h2>
         <a id="changelog"></a>
+        <h2>Changelog</h2>
         <p class="what">Everything that's gone on before, in reverse chronological order.</p>
         
+        <a id="changelog-2013-02-01"></a>
         <h3>2013.02.01</h3>
         
         <article>
-            <header class="clearfix">
-                <h4>Project Heading <span class="by">by githubname</span></h4>
-                
-                <div class="actions">
+            <div class="row">
+                <header class="clearfix span9">
+                    <h4>Project Heading <span class="by">by githubname</span></h4>
+                    <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut </p>
+                </header>
+                <div class="span3">
+                    <div class="actions">
                     <iframe src="http://ghbtns.com/github-btn.html?user=markdotto&repo=github-buttons&type=watch"
                   allowtransparency="true" frameborder="0" scrolling="0" width="60" height="20"></iframe>
                     <iframe src="http://ghbtns.com/github-btn.html?user=markdotto&type=follow"
                     allowtransparency="true" frameborder="0" scrolling="0" width="132" height="20"></iframe>
+                    </div>
                 </div>
-            </header>
+            </div>
             
             <ol class="slides">
                 <li><div class="slide"></a></li>
@@ -111,16 +117,20 @@
         </article>
         
         <article>
-            <header class="clearfix">
-                <h4>Project Heading <span class="by">by githubname</span></h4>
-                
-                <div class="actions">
+            <div class="row">
+                <header class="clearfix span9">
+                    <h4>Project Heading <span class="by">by githubname</span></h4>
+                    <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut </p>
+                </header>
+                <div class="span3">
+                    <div class="actions">
                     <iframe src="http://ghbtns.com/github-btn.html?user=markdotto&repo=github-buttons&type=watch"
                   allowtransparency="true" frameborder="0" scrolling="0" width="60" height="20"></iframe>
                     <iframe src="http://ghbtns.com/github-btn.html?user=markdotto&type=follow"
                     allowtransparency="true" frameborder="0" scrolling="0" width="132" height="20"></iframe>
+                    </div>
                 </div>
-            </header>
+            </div>
             
             <ol class="slides">
                 <li><div class="slide"></a></li>
