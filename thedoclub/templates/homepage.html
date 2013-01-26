@@ -13,5 +13,10 @@
     
     The Do Club DOT COM
     
+    <form method="post" action="{% url presentation-create %}">
+        {% csrf_token %}
+        <input type="submit" value="Submit Presentation Proposal" />
+    </form>
+    
 </body>
 </html>

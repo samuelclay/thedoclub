@@ -14,8 +14,11 @@ class Presentation(models.Model):
     github_url = models.CharField(max_length=256, null=True, blank=True)
     is_submitted = models.BooleanField(default=False)
     
-    def absolute_url(self):
-        return '/round/%s' % self.url
+    def absolute_url(self, url_type=None):
+        if url_type == 'edit':
+            return reverse('presentation-edit', kwargs={"presentation_uuid": self.url})
+        else:
+            return reverse('presentation-view', kwargs={"presentation_uuid": self.url})
     
     @classmethod
     def generate_url(cls):
