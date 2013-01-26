@@ -33,3 +33,7 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+# The Do Club
+dev_settings.py
+prod_settings.py
