@@ -9,9 +9,11 @@
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>The Do Club</h1>
-            <nav>
+        <header class="row heading">
+            <div class="span3">
+                <img src="/static/img/do-128.png" />
+            </div>
+            <nav class="span9">
                 <ul>
                     <li><a href="/#upcoming">Upcoming</a></li>
                     <li><a href="/#present">Present</a></li>
@@ -19,14 +21,14 @@
                 </ul>
             </nav>
         </header>
-        <article>
+        <article class="upcoming">
             <h2 class="hide">Upcoming</h2>
             <a id="upcoming"></a>
-            <p>The do club is a meetup for people who code interesting things. Meet like-minded people, learn about great open source projects and eat well.</p>
+            <p class="what">The do club is a meetup for people who code interesting things. Meet like-minded people, learn about great open source projects and eat well.</p>
             <h3>Next club: 1st February 2012</h3>
             
         </article>
-        <article>
+        <article class="present">
             <a id="present"></a>
             <form method="post" action="{% url presentation-create %}">
                 {% csrf_token %}
