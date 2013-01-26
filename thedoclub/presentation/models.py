@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.template.loader import render_to_string
 import hashlib
 import uuid
 import random
@@ -20,8 +21,31 @@ class Presentation(models.Model):
         else:
             return reverse('presentation-view', kwargs={"presentation_uuid": self.url})
     
-    @classmethod
-    def generate_url(cls):
+    @staticmethod
+    def generate_url():
         # XXX TODO: check for collision
         url = unicode(uuid.uuid4())[:6]
         return url
+        
+    @classmethod
+    def create(cls):
+        presentation = cls.objects.create(url=cls.generate_url())
+        for slide_number in range(5):
+            slide_number += 1
+            slide = Slide.objects.create(presentation=presentation, order=slide_number)
+            slide.github_user_id = presentation.github_user_id
+            slide.content = render_to_string('slides/slide%s.md' % slide_number, {
+                
+            })
+            slide.save()
+        
+        return presentation
+
+
+
+class Slide(models.Model):
+    presentation = models.ForeignKey(Presentation, related_name='slides')
+    github_user_id = models.CharField(max_length=40)
+    order = models.IntegerField()
+    content = models.TextField(null=True, blank=True)
+    

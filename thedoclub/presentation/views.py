@@ -9,8 +9,8 @@ from presentation.models import Presentation
 def create(request):
     if request.method != 'POST' and not request.GET.get('force'):
         return HttpResponseForbidden()
-    
-    presentation = Presentation.objects.create(url=Presentation.generate_url())
+
+    presentation = Presentation.create()
     
     return HttpResponseRedirect(presentation.absolute_url('edit'))
 
