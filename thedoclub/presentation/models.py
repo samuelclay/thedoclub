@@ -10,6 +10,7 @@ import datetime
 
 class Presentation(models.Model):
     url = models.CharField(max_length=6, unique=True)
+    title = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
     github_user_id = models.CharField(max_length=40)
     github_url = models.CharField(max_length=256, null=True, blank=True)
@@ -40,7 +41,6 @@ class Presentation(models.Model):
             slide.save()
         
         return presentation
-
 
 
 class Slide(models.Model):
