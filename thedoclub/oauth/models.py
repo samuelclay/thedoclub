@@ -1,5 +1,6 @@
 import bcrypt
 import datetime
+import iso8601
 from django.db import models
 from vendor.github import GitHub
 
@@ -83,7 +84,11 @@ class GitHubRepo(models.Model):
     name = models.CharField(max_length=255, null=True)
     watchers = models.IntegerField(null=True)
     forks = models.IntegerField(null=True)
-
+    pushed_at = models.DateTimeField(null=True)
+    
+    class Meta:
+        ordering = ['organization_name', '-pushed_at']
+        
     def __unicode__(self):
         return "[%s] %s (%s/%s)" % (self.organization_name if self.organization_name else "---",
                                     self.name, self.watchers, self.forks)
@@ -98,12 +103,15 @@ class GitHubRepo(models.Model):
             org_id = org['id']
             avatar_url = org['avatar_url']
         for repo in repos:
+            if repo['private']: continue
+            
             cls.objects.get_or_create(defaults={
                 "description": repo['description'],
                 "html_url": repo['html_url'],
                 "watchers": repo['watchers'],
                 "forks": repo['forks'],
                 "avatar_url": avatar_url,
+                "pushed_at": iso8601.parse_date(repo['pushed_at']).replace(tzinfo=None),
             }, **{
                 "user": user,
                 "organization_id": org_id,
