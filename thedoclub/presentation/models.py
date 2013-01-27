@@ -34,17 +34,18 @@ class Presentation(models.Model):
     @classmethod
     def create(cls, user):
         presentation = cls.objects.create(user=user, url=cls.generate_url())
-        for slide_number in range(5):
-            slide_number += 1
-            slide = Slide.objects.create(presentation=presentation, order=slide_number)
-            slide.user = presentation.user
-            slide.content = render_to_string('slides/slide%s.md' % slide_number, {
-                
-            })
-            slide.save()
         
         return presentation
-    
+
+    def build_slides(self):
+        for slide_number in range(5):
+            slide_number += 1
+            slide = Slide.objects.create(presentation=self, order=slide_number)
+            slide.content = render_to_string('slides/slide%s.md' % slide_number, {
+                "repo": self.repo,
+            })
+            slide.save()
+
     def __unicode__(self):
         return "%s: %s" % (self.user, self.repo)
 
