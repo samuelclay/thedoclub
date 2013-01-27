@@ -8,10 +8,14 @@
 <ul class="repos">
     {% for repo in ghuser.repos.all %}
         <li>
-            <a class="repo" href="/presentation/{{ presentation.url }}/choose/{{ repo.repo_id }}">
+            <a class="repo" href="/presentation/choose/{{ repo.repo_id }}">
                 <img src="{{ repo.avatar_url }}" />
                 <h3>{{ repo.name }}</h3>
                 <p>{{ repo.description }}</p>
+                
+                {% if repo.presentation %}
+                in progress
+                {% endif %}
             </a>
         </li>
     {% endfor %}
