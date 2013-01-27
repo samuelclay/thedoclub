@@ -2,16 +2,19 @@
 
 {% block content %}
 
-Choose: 
+<h2>Choose a Repo</h2>
+<p>We'll use this to let people follow and watch, and also to create the presentation template.</p>
 
-<div class="repos">
+<ul class="repos">
     {% for repo in ghuser.repos.all %}
-        <div class="repo">
-            <div class="repo-org">{{ repo.organization_name }}</div>
-            <div class="repo-name">{{ repo.name }}</div>
-            <img src="{{ repo.avatar_url }}">
-        </div>
+        <li>
+            <a class="repo" href="/presentation/{{ presentation.url }}/choose/{{ repo.repo_id }}">
+                <img src="{{ repo.avatar_url }}" width="40" height="40" />
+                <h3 class="repo-name">{{ repo.name }}</h3>
+                <h4 class="repo-org">{{ repo.organization_name }}</h4>
+            </a>
+        </li>
     {% endfor %}
-</div>
+</ul>
     
 {% endblock %}

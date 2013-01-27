@@ -1,156 +1,143 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-    <header class="row heading">
-        <div class="span6">
-            <img src="/static/img/do-256.png" width="128" height="128" />
-        </div>
-        <nav class="span6">
-            <ul>
-                <li><a href="/#upcoming">Upcoming</a></li>
-                <li><a href="/#present">Present</a></li>
-                <li><a href="/#changelog">Changelog</a></li>
-            </ul>
-        </nav>
-    </header>
-    <section class="upcoming">
-        <a id="upcoming"></a>
-        <h2 class="hide">Upcoming</h2>
-        <p class="what">The Do Club is a meetup for people who code interesting things to present their work and gain recognition. Come along, meet like-minded folk and learn about great open source projects big &amp; small.</p>
-        
-        <div class="row">
-            <div class="span5">
-                <h3>Next event: 1st February 2012</h3>
-                <h4>at Google San Francisco</h4>
-                
-                <a href="/" class="btn btn-primary btn-large">I'll Be There!</a>
-                <p class="note">(Sign in with Github)</p>
-                
-                <!--
-                <p>You're going! Fancy telling other people about it?</p>
-                <div class="shareskies">
-                    <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-count="none" data-lang="en">Tweet</a>
-                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-                </div>
-                -->
-            </div>
-            <div class="span7">
-                <ul class="attendees">
-                    <li><img src="http://lorempixel.com/60/60/people/?1" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?2" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?3" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?4" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?5" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?6" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?7" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?2" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?3" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?4" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?5" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?6" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?7" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?2" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?3" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?4" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?5" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?6" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?7" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?2" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?3" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?4" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?5" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?6" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?7" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?2" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?3" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?4" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?5" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?6" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?7" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?2" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?3" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?4" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?5" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?6" width="60" height="60" /></li>
-                    <li><img src="http://lorempixel.com/60/60/people/?7" width="60" height="60" /></li>
-                    
-                </ul>
-            </div>
-        </div>
-        
-    </section>
-    <section class="present">
-        <a id="present"></a>
-        <h2>Present</h2>
-        <p class="what">Got something to show off at the next event? Each presentation is around 10 minutes <strong>(5 slides)</strong> and we've made it as easy as possible to take part - don't worry if you've never presented anything before!</p>
-        
-        <form method="post" action="{% url presentation-create %}">
-            {% csrf_token %}
-            <input type="submit" value="Present Your Project" class="btn btn-primary btn-large" />
-            <p class="note">(You'll need to sign in with Github)</p>
-        </form>
-    </section>
-    <section class="changelog">
-        <a id="changelog"></a>
-        <h2>Changelog</h2>
-        <p class="what">Everything that's gone on before, in reverse chronological order.</p>
-        
-        <a id="changelog-2013-02-01"></a>
-        <h3>2013.02.01</h3>
-        
-        <article>
-            <div class="row">
-                <header class="clearfix span9">
-                    <h4>Project Heading <span class="by">by githubname</span></h4>
-                    <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut </p>
-                </header>
-                <div class="span3">
-                    <div class="actions">
-                    <iframe src="http://ghbtns.com/github-btn.html?user=markdotto&repo=github-buttons&type=watch"
-                  allowtransparency="true" frameborder="0" scrolling="0" width="60" height="20"></iframe>
-                    <iframe src="http://ghbtns.com/github-btn.html?user=markdotto&type=follow"
-                    allowtransparency="true" frameborder="0" scrolling="0" width="132" height="20"></iframe>
-                    </div>
-                </div>
-            </div>
-            
-            <ol class="slides">
-                <li><div class="slide"></a></li>
-                <li><div class="slide"></a></li>
-                <li><div class="slide"></a></li>
-                <li><div class="slide"></a></li>
-                <li><div class="slide"></a></li>
-            </ol>
-        </article>
-        
-        <article>
-            <div class="row">
-                <header class="clearfix span9">
-                    <h4>Project Heading <span class="by">by githubname</span></h4>
-                    <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut </p>
-                </header>
-                <div class="span3">
-                    <div class="actions">
-                    <iframe src="http://ghbtns.com/github-btn.html?user=markdotto&repo=github-buttons&type=watch"
-                  allowtransparency="true" frameborder="0" scrolling="0" width="60" height="20"></iframe>
-                    <iframe src="http://ghbtns.com/github-btn.html?user=markdotto&type=follow"
-                    allowtransparency="true" frameborder="0" scrolling="0" width="132" height="20"></iframe>
-                    </div>
-                </div>
-            </div>
-            
-            <ol class="slides">
-                <li><div class="slide"></a></li>
-                <li><div class="slide"></a></li>
-                <li><div class="slide"></a></li>
-                <li><div class="slide"></a></li>
-                <li><div class="slide"></a></li>
-            </ol>
-        </article>
 
-    </section>
-</div>
+<section class="upcoming">
+    <a id="upcoming"></a>
+    <h2 class="hide">Upcoming</h2>
+    <p class="what">The Do Club is a meetup for people who code interesting things to present their work and gain recognition. Come along, meet like-minded folk and learn about great open source projects big &amp; small.</p>
+        
+    <div class="row">
+        <div class="span5">
+            <h3>Next event: 1st February 2012</h3>
+            <h4>at Google San Francisco</h4>
+                
+            <a href="/" class="btn btn-primary btn-large">I'll Be There!</a>
+            <p class="note">(Sign in with Github)</p>
+                
+            <!--
+            <p>You're going! Fancy telling other people about it?</p>
+            <div class="shareskies">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-count="none" data-lang="en">Tweet</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+            -->
+        </div>
+        <div class="span7">
+            <ul class="attendees">
+                <li><img src="http://lorempixel.com/60/60/people/?1" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?2" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?3" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?4" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?5" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?6" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?7" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?2" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?3" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?4" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?5" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?6" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?7" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?2" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?3" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?4" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?5" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?6" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?7" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?2" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?3" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?4" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?5" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?6" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?7" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?2" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?3" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?4" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?5" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?6" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?7" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?2" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?3" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?4" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?5" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?6" width="60" height="60" /></li>
+                <li><img src="http://lorempixel.com/60/60/people/?7" width="60" height="60" /></li>
+                    
+            </ul>
+        </div>
+    </div>
+        
+</section>
+<section class="present">
+    <a id="present"></a>
+    <h2>Present</h2>
+    <p class="what">Got something to show off at the next event? Each presentation is around 10 minutes <strong>(5 slides)</strong> and we've made it as easy as possible to take part - don't worry if you've never presented anything before!</p>
+        
+    <form method="post" action="{% url presentation-create %}">
+        {% csrf_token %}
+        <input type="submit" value="Present Your Project" class="btn btn-primary btn-large" />
+        <p class="note">(You'll need to sign in with Github)</p>
+    </form>
+</section>
+<section class="changelog">
+    <a id="changelog"></a>
+    <h2>Changelog</h2>
+    <p class="what">Everything that's gone on before, in reverse chronological order.</p>
+        
+    <a id="changelog-2013-02-01"></a>
+    <h3>2013.02.01</h3>
+        
+    <article>
+        <div class="row">
+            <header class="clearfix span9">
+                <h4>Project Heading <span class="by">by githubname</span></h4>
+                <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut </p>
+            </header>
+            <div class="span3">
+                <div class="actions">
+                <iframe src="http://ghbtns.com/github-btn.html?user=markdotto&repo=github-buttons&type=watch"
+              allowtransparency="true" frameborder="0" scrolling="0" width="60" height="20"></iframe>
+                <iframe src="http://ghbtns.com/github-btn.html?user=markdotto&type=follow"
+                allowtransparency="true" frameborder="0" scrolling="0" width="132" height="20"></iframe>
+                </div>
+            </div>
+        </div>
+            
+        <ol class="slides">
+            <li><div class="slide"></a></li>
+            <li><div class="slide"></a></li>
+            <li><div class="slide"></a></li>
+            <li><div class="slide"></a></li>
+            <li><div class="slide"></a></li>
+        </ol>
+    </article>
+        
+    <article>
+        <div class="row">
+            <header class="clearfix span9">
+                <h4>Project Heading <span class="by">by githubname</span></h4>
+                <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut </p>
+            </header>
+            <div class="span3">
+                <div class="actions">
+                <iframe src="http://ghbtns.com/github-btn.html?user=markdotto&repo=github-buttons&type=watch"
+              allowtransparency="true" frameborder="0" scrolling="0" width="60" height="20"></iframe>
+                <iframe src="http://ghbtns.com/github-btn.html?user=markdotto&type=follow"
+                allowtransparency="true" frameborder="0" scrolling="0" width="132" height="20"></iframe>
+                </div>
+            </div>
+        </div>
+            
+        <ol class="slides">
+            <li><div class="slide"></a></li>
+            <li><div class="slide"></a></li>
+            <li><div class="slide"></a></li>
+            <li><div class="slide"></a></li>
+            <li><div class="slide"></a></li>
+        </ol>
+    </article>
+</section>
+    
 {% endblock content %}
 
 {% block js %}

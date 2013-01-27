@@ -10,11 +10,25 @@
 </head>
 
 <body>
+    <div class="container">
+        <header class="row heading">
+            <div class="span6">
+                <img src="/static/img/do-256.png" width="128" height="128" />
+            </div>
+            <nav class="span6">
+                <ul>
+                    <li><a href="/#upcoming">Upcoming</a></li>
+                    <li><a href="/#present">Present</a></li>
+                    <li><a href="/#changelog">Changelog</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        {% block content %}{% endblock %}
     
-    {% block content %}{% endblock %}
-    
-    <footer>
-    </footer>
+        <footer>
+        </footer>
+    </div>
     
     <script src="/static/js/jquery.min.js" charset="utf-8"></script>
     <script src="/static/js/bootstrap.min.js" charset="utf-8"></script>

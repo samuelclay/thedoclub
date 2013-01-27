@@ -116,3 +116,34 @@ section {
 		}
 	}
 }
+
+.repos {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	
+	.repo {
+		display: block;
+		background: #f5f5f5;
+		padding: 5px 5px 5px 75px;
+		position: relative;
+		height: 40px;
+		margin-bottom: 5px;
+		
+		img {
+			position: absolute;
+			top: 5px;
+			left: 5px;
+		}
+		
+		h3 {
+			margin: 0;
+			color: #444;
+		}
+	}
+	
+	.repo:hover {
+		background: #ddd;
+		text-decoration: none;
+	}
+}
