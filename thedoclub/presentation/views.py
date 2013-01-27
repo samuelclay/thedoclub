@@ -23,7 +23,8 @@ def choose(request):
 def choose_confirm(request, repo_id):
     repo = get_object_or_404(GitHubRepo, repo_id=repo_id)
     
-    Presentation.objects.get_or_create(user=request.ghuser, repo=repo)
+    presentation, _ = Presentation.objects.get_or_create(user=request.ghuser, repo=repo)
+    presentation.build_slides()
     
     return HttpResponseRedirect(reverse('presentation-edit', kwargs={'repo_id': repo.repo_id}))
 
