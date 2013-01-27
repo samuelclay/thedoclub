@@ -98,6 +98,8 @@ class GitHubRepo(models.Model):
             org_id = org['id']
             avatar_url = org['avatar_url']
         for repo in repos:
+            if repo['private']: continue
+            
             cls.objects.get_or_create(defaults={
                 "description": repo['description'],
                 "html_url": repo['html_url'],
