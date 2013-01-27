@@ -10,33 +10,12 @@ from oauth.models import GitHubRepo, GitHubUser
 
 
 class Presentation(models.Model):
-    user = models.ForeignKey(GitHubUser)
-    repo = models.ForeignKey(GitHubRepo, null=True)
-    url = models.CharField(max_length=6, unique=True)
+    user = models.ForeignKey(GitHubUser, related_name="presentations")
+    repo = models.OneToOneField(GitHubRepo, null=True)
     title = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
     is_submitted = models.BooleanField(default=False)
     
-    def absolute_url(self, url_type=None):
-        if url_type == 'edit':
-            return reverse('presentation-edit', kwargs={"presentation_uuid": self.url})
-        elif url_type == 'choose':
-            return reverse('presentation-choose', kwargs={"presentation_uuid": self.url})
-        else:
-            return reverse('presentation-view', kwargs={"presentation_uuid": self.url})
-    
-    @staticmethod
-    def generate_url():
-        # XXX TODO: check for collision
-        url = unicode(uuid.uuid4())[:6]
-        return url
-        
-    @classmethod
-    def create(cls, user):
-        presentation = cls.objects.create(user=user, url=cls.generate_url())
-        
-        return presentation
-
     def build_slides(self):
         for slide_number in range(5):
             slide_number += 1

@@ -73,7 +73,7 @@
     <h2>Present</h2>
     <p class="what">Got something to show off at the next event? Each presentation is around 10 minutes <strong>(5 slides)</strong> and we've made it as easy as possible to take part - don't worry if you've never presented anything before!</p>
         
-    <form method="post" action="{% url presentation-create %}">
+    <form method="post" action="{% url presentation-choose %}">
         {% csrf_token %}
         <input type="submit" value="Present Your Project" class="btn btn-primary btn-large" />
         <p class="note">(You'll need to sign in with Github)</p>
