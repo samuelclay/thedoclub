@@ -25,7 +25,15 @@
                 <h4>at Google San Francisco</h4>
                 
                 <a href="/" class="btn btn-primary btn-large">I'll Be There!</a>
-                <p class="note">(You'll need to sign in with Github)</p>
+                <p class="note">(Sign in with Github)</p>
+                
+                <!--
+                <p>You're going! Fancy telling other people about it?</p>
+                <div class="shareskies">
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-count="none" data-lang="en">Tweet</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </div>
+                -->
             </div>
             <div class="span7">
                 <ul class="attendees">
@@ -144,3 +152,7 @@
     </section>
 </div>
 {% endblock content %}
+
+{% block js %}
+<script src="/static/js/homepage.js" type="text/javascript" charset="utf-8"></script>
+{% endblock js %}
