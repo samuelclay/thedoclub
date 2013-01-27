@@ -4,53 +4,45 @@ from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidde
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from presentation.models import Presentation
 from oauth.models import GitHubRepo
 from utils import github_login_required
 
 
 @github_login_required
-def create(request):
-    presentation = Presentation.create(user=request.ghuser)
-    
-    return HttpResponseRedirect(presentation.absolute_url('choose'))
-
-@github_login_required
-def choose(request, presentation_uuid):
-    presentation = get_object_or_404(Presentation, url=presentation_uuid)
-
+def choose(request):
     request.ghuser.fetch_repos()
     
     return render_to_response('presentation_choose.html', {
-        'presentation': presentation,
         'ghuser': request.ghuser,
         'settings': settings,
     }, context_instance=RequestContext(request))
 
 @github_login_required
-def choose_confirm(request, presentation_uuid, repo_id):
-    presentation = get_object_or_404(Presentation, url=presentation_uuid)
+def choose_confirm(request, repo_id):
     repo = get_object_or_404(GitHubRepo, repo_id=repo_id)
     
-    presentation.repo = repo
-    presentation.save()
+    Presentation.objects.get_or_create(user=request.ghuser, repo=repo)
     
-    return HttpResponseRedirect(presentation.absolute_url('edit'))
+    return HttpResponseRedirect(reverse('presentation-edit', kwargs={'repo_id': repo.repo_id}))
 
 @github_login_required
-def edit(request, presentation_uuid):
-    presentation = get_object_or_404(Presentation, url=presentation_uuid)
+def edit(request, repo_id):
+    repo = get_object_or_404(GitHubRepo, repo_id=repo_id)
     
     return render_to_response('presentation_edit.html', {
-        'presentation': presentation,
+        'presentation': repo.presentation,
+        'repo': repo,
         'ghuser': request.ghuser,
         'settings': settings,
     }, context_instance=RequestContext(request))
 
-def view(request, presentation_uuid):
-    presentation = get_object_or_404(Presentation, url=presentation_uuid)
-    
+def view(request, repo_id):
+    repo = get_object_or_404(GitHubRepo, repo_id=repo_id)    
+
     return render_to_response('presentation_view.html', {
-        'presentation': presentation,
+        'presentation': repo.presentation,
+        'repo': repo,
         'settings': settings,
     }, context_instance=RequestContext(request))
