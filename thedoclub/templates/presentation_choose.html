@@ -9,9 +9,9 @@
     {% for repo in ghuser.repos.all %}
         <li>
             <a class="repo" href="/presentation/{{ presentation.url }}/choose/{{ repo.repo_id }}">
-                <img src="{{ repo.avatar_url }}" width="40" height="40" />
-                <h3 class="repo-name">{{ repo.name }}</h3>
-                <h4 class="repo-org">{{ repo.organization_name }}</h4>
+                <img src="{{ repo.avatar_url }}" />
+                <h3>{{ repo.name }}</h3>
+                <p>{{ repo.description }}</p>
             </a>
         </li>
     {% endfor %}
