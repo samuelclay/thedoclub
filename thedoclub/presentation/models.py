@@ -19,11 +19,14 @@ class Presentation(models.Model):
     def build_slides(self):
         for slide_number in range(5):
             slide_number += 1
-            slide = Slide.objects.create(presentation=self, order=slide_number)
-            slide.content = render_to_string('slides/slide%s.md' % slide_number, {
-                "repo": self.repo,
-            })
-            slide.save()
+            slide, _ = Slide.objects.get_or_create(presentation=self, order=slide_number)
+            if not slide.content:
+                slide.content = render_to_string('slides/slide%s.md' % slide_number, {
+                    "user": self.user,
+                    "repo": self.repo,
+                    "presentation": self,
+                })
+                slide.save()
 
     def __unicode__(self):
         return "%s: %s" % (self.user, self.repo)
