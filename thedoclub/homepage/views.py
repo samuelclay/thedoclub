@@ -10,7 +10,7 @@ from event.models import Event
 
 def home(request):
     
-    event = Event.objects.order_by('-starts_at')[0]
+    event = Event.objects.all()[0]
     secret_token = request.COOKIES.get('doclub_sessionid')
     attending = False
     

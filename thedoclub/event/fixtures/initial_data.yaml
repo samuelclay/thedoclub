@@ -1,0 +1,5 @@
+- model: event.Event
+  pk: 1
+  fields:
+    starts_at: 2013-02-01T00:00:00
+    location: SF

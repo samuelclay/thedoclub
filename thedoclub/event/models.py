@@ -10,5 +10,8 @@ class Event(models.Model):
     attendees = models.ManyToManyField(GitHubUser)
     repos = models.ManyToManyField(GitHubRepo)
     
+    class Meta:
+        ordering = ['-starts_at']
+    
     def __unicode__(self):
         return "%s: %s" % (self.starts_at, self.location)
