@@ -36,6 +36,7 @@ class Slide(models.Model):
     presentation = models.ForeignKey(Presentation, related_name='slides')
     order = models.IntegerField()
     content = models.TextField(null=True, blank=True)
+    html = models.TextField(null=True, blank=True)
     
     def __unicode__(self):
         return "%s: Slide #%s (%s bytes)" % (self.presentation, self.order, len(self.content))

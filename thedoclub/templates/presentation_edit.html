@@ -4,7 +4,18 @@
 
 Edit: {{ repo }} -- {{ presentation }}
 
-{{ presentation.slides.all }}
+<div class="slide-editor">
+{% for slide in presentation.slides.all %}
+    <div class="slide-editor-slide">
+        <div class="editor">
+            <textarea name="slide_{{ slide.order }}">{{ slide.content }}</textarea>
+        </div>
+        <div class="preview">
+            {{ slide.html }}
+        </div>
+    </div>
+{% endfor %}
+</div>
 
     
 {% endblock %}
