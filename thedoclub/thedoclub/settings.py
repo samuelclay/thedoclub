@@ -113,6 +113,7 @@ INSTALLED_APPS = (
     'presentation',
     'oauth',
     'homepage',
+    'event',
 )
 
 # A sample logging configuration. The only tangible logging

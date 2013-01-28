@@ -8,6 +8,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'homepage.views.home', name='home'),
+    url(r'^event/attend', 'event.views.attend', name='attend'),
     url(r'^presentation/choose/(?P<repo_id>\w+)?', 'presentation.views.choose_confirm', name='presentation-choose-confirm'),
     url(r'^presentation/choose/?', 'presentation.views.choose', name='presentation-choose'),
     url(r'^presentation/(?P<repo_id>\w+)/edit/?', 'presentation.views.edit', name='presentation-edit'),

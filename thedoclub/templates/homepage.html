@@ -11,58 +11,27 @@
         <div class="span5">
             <h3>Next event: 1st February 2012</h3>
             <h4>at Google San Francisco</h4>
-                
-            <a href="/" class="btn btn-primary btn-large">I'll Be There!</a>
-            <p class="note">(Sign in with Github)</p>
-                
-            <!--
-            <p>You're going! Fancy telling other people about it?</p>
-            <div class="shareskies">
-                <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-count="none" data-lang="en">Tweet</a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-            </div>
-            -->
+            
+            {% if attending %}
+                <p>You're going! Fancy telling other people about it?</p>
+                <div class="shareskies">
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-count="none" data-lang="en">Tweet</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </div>
+            {% else %}
+                <a href="/event/attend" class="btn btn-primary btn-large">I'll Be There!</a>
+                <p class="note">(Sign in with Github)</p>
+            {% endif %}
         </div>
         <div class="span7">
             <ul class="attendees">
-                <li><img src="http://lorempixel.com/60/60/people/?1" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?2" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?3" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?4" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?5" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?6" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?7" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?2" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?3" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?4" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?5" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?6" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?7" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?2" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?3" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?4" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?5" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?6" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?7" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?2" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?3" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?4" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?5" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?6" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?7" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?2" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?3" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?4" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?5" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?6" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?7" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?2" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?3" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?4" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?5" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?6" width="60" height="60" /></li>
-                <li><img src="http://lorempixel.com/60/60/people/?7" width="60" height="60" /></li>
-                    
+                {% for attendee in event.attendees.all %}
+                <li>
+                    <a href="https://github.com/{{ attendee.login }}" target="_blank">
+                        <img src="{{ attendee.avatar_url }}" width="60" height="60" title="{{ attendee.name }}" />
+                    </a>
+                </li>
+                {% endfor %}
             </ul>
         </div>
     </div>
