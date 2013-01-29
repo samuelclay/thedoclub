@@ -10,18 +10,57 @@ DC.PresentationEditor = function(options) {
 DC.PresentationEditor.prototype = {
     
     initialize: function() {
-        $("textarea", this.$el).bind('keyup', _.bind(this.renderPreview, this));
-        this.renderPreview();
+        this.autosave();
+        this.renderPreview({skip_save: true});
+        $("textarea", this.$el).bind('keyup', _.bind(this.renderPreview, this, {}));
     },
     
-    renderPreview: function() {
-        var slideHtml = this.slideHtml();
+    renderPreview: function(options) {
+        options = options || {};
+        console.log(["renderPreview", options]);
+        var slideHtml = this.slideHtml(this.$el);
         $(".preview", this.$el).html(slideHtml);
+        if (!options.skip_save) {
+            this._throttleSave();
+            this._debounceSave();
+        }
     },
     
-    slideHtml: function() {
-        var text = $("textarea", this.$el).val();
+    slideText: function($el) {
+        return $("textarea", $el).val();
+    },
+    
+    slideHtml: function($el) {
+        var text = this.slideText($el);
         return marked.parse(text);
+    },
+    
+    autosave: function() {
+        this._throttleSave = _.throttle(this.save, 1000);
+        this._debounceSave = _.debounce(this.save, 5000);
+    },
+    
+    save: function() {
+        var data = this.serialize();
+        $.post(window.location.href, data);
+    },
+    
+    serialize: function() {
+        var self = this;
+        var data = {
+            "slides": [],
+            "csrfmiddlewaretoken": $("input[name=csrfmiddlewaretoken]").val()
+        };
+        
+        $(".slide").each(function() {
+            var text = self.slideText(this);
+            var html = self.slideHtml(this);
+            data["slides"].push([text, html]);
+        });
+        
+        data["slides"] = JSON.stringify(data["slides"]);
+        
+        return data;
     }
     
 };

@@ -1,4 +1,5 @@
 import datetime
+import json
 from django.template.loader import render_to_string
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render_to_response
@@ -31,6 +32,10 @@ def choose_confirm(request, repo_id):
 @github_login_required
 def edit(request, repo_id):
     repo = get_object_or_404(GitHubRepo, repo_id=repo_id)
+    
+    if request.method == "POST":
+        slides = json.loads(request.POST["slides"])
+        repo.presentation.save_slides(slides)
     
     return render_to_response('presentation_edit.html', {
         'presentation': repo.presentation,
