@@ -164,6 +164,69 @@ section {
     
 }
 
+/* ========== */
+/* = Footer = */
+/* ========== */
+
+footer {
+    margin: 24px 0 0;
+    padding: 36px 0;
+    background-color: black;
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    
+    .about {
+        float: left;
+        text-align: center;
+        color: rgba(255, 255, 255, .3);
+        font-size: 24px;
+        line-height: 24px;
+        padding: 48px 0 0 0;
+        
+        .amp {
+            color: #666;
+            font-size: 1.05em;
+            font-family: "Warnock Pro", "Goudy Old Style","Palatino","Book Antiqua",serif;
+            font-style: italic;
+        }
+        .asphora {
+            font-size: .85em;
+        }
+        a {
+                color: #546B79;
+            
+            &:hover {
+                color: #9ABED2;
+                text-decoration: none;
+            }
+        }
+    }
+    
+    .hicks {
+        float: right;
+        text-align: right;
+        position: relative;
+        font-family: "Helvetica Neue", Helvetica, Arial;
+        
+        img {
+            position: absolute;
+            right: 80px;
+            top: 30px;
+            z-index: 0;
+        }
+        
+        .hicks-text {
+            z-index: 1;
+            position: relative;
+            color: #686965;
+            
+            .big {
+                font-size: 120%;
+                color: #6F716B;
+            }
+        }
+    }
+}
+
 /* ======================= */
 /* = Presentation Editor = */
 /* ======================= */
