@@ -1,0 +1,52 @@
+{% extends "slim_base.html" %}
+
+{% block content %}
+
+<section class="loading">
+    
+    <div class="progress progress-striped active">
+      <div class="bar" style="width: 100%;"></div>
+    </div>
+
+    <h2 class="repo-count muted">Fetching GitHub repositories...</h2>
+    
+</section>
+
+{% endblock %}
+
+{% block js %}
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+        var pollRepoCount = function() {
+            $.get("{% url oauth-status %}", function(data) {
+                if (data.repo_count) {
+                    $(".repo-count").text("Found " + data.repo_count + 
+                                          (data.repo_count == 1 ? " repository." : " repositories."));
+                    $(".bar").css("width", (data.finished_repos / data.repo_count) * 100.0 + "%");
+                    if (data.repo_count == data.finished_repos) {
+                        window.location.href = data.next || "{{ next }}" || "/";
+                    }
+                }
+            });
+        };
+        _.delay(function() {
+            $.ajax({
+                url: "{% url oauth-callback %}",
+                data: {
+                    state: "{{ state }}",
+                    code: "{{ code }}"
+                },
+                type: "GET",
+                success: function() {
+                    setInterval(pollRepoCount, 1000);
+                },
+                error: function() {
+                    window.location.href = "{% url oauth-authorize %}";
+                }
+            });
+        }, 1000);
+    });
+</script>
+
+{% endblock %}

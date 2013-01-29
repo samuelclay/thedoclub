@@ -1,0 +1,27 @@
+{% extends "slim_base.html" %}
+
+{% block content %}
+
+<section class="loading">
+    
+    <div class="progress progress-striped active">
+      <div class="bar" style="width: 100%;"></div>
+    </div>
+    
+    <h2 class="muted">Authorizing GitHub...</h2>
+    
+</section>
+
+{% endblock %}
+
+{% block js %}
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+        _.delay(function() {
+            window.location.href = "{% url oauth-authorize %}?next={{ next }}";
+        }, 1000);
+    });
+</script>
+
+{% endblock %}

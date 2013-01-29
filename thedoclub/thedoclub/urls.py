@@ -15,6 +15,9 @@ urlpatterns = patterns('',
     url(r'^presentation/(?P<repo_id>\w+)/?', 'presentation.views.view', name='presentation-view'),
     url(r'^oauth/authorize/?', 'oauth.views.authorize', name='oauth-authorize'),
     url(r'^oauth/callback/?', 'oauth.views.callback', name='oauth-callback'),
+    url(r'^oauth/start/?', 'oauth.views.start', name='oauth-start'),
+    url(r'^oauth/end/?', 'oauth.views.end', name='oauth-end'),
+    url(r'^oauth/status/?', 'oauth.views.status', name='oauth-status'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

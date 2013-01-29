@@ -18,7 +18,7 @@ class GitHubUser(models.Model):
     hireable = models.BooleanField(default=False)
     github_id = models.CharField(max_length=40, null=True)
     location = models.CharField(max_length=255, null=True)
-    login = models.CharField(max_length=40, null=True)
+    login = models.CharField(max_length=40, null=True, db_index=True)
     name = models.CharField(max_length=128, null=True)
     public_repos = models.IntegerField(null=True)
     repo_refresh_date = models.DateTimeField(null=True)
@@ -37,7 +37,7 @@ class GitHubUser(models.Model):
     
     def gh(self):
         return GitHub(access_token=self.access_token)
-        
+    
     def fetch_user_info(self):
         gh = self.gh()
         user = gh.user.get()
@@ -57,13 +57,17 @@ class GitHubUser(models.Model):
         
         self.save()
     
-    def fetch_repos(self, force=False):
+    def fetch_repos(self, force=False, delay=False):
         gh = self.gh()
         
         day_ago = datetime.datetime.now() - datetime.timedelta(days=1)
         if not force and self.repo_refresh_date and self.repo_refresh_date > day_ago:
             return
-
+        
+        if delay and not force:
+            # FetchRepos.apply_async(kwargs={"login": self.login})
+            return
+            
         user_repos = gh.user.repos.get()
         self.repo_refresh_date = datetime.datetime.now()
         self.save()

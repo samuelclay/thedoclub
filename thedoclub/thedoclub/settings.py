@@ -22,6 +22,9 @@ DATABASES = {
     }
 }
 
+INTERNAL_IPS = (
+    '127.0.0.1',
+)
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -96,6 +99,16 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+)
+
 ROOT_URLCONF = 'thedoclub.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
@@ -110,6 +123,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djcelery',
     'presentation',
     'oauth',
     'homepage',
@@ -144,6 +158,14 @@ LOGGING = {
         },
     }
 }
+
+# ==========
+# = Celery =
+# ==========
+
+BROKER_URL = 'redis://localhost:6379/5'
+import djcelery
+djcelery.setup_loader()
 
 if '/Users' in os.getcwd():
     PROD = False

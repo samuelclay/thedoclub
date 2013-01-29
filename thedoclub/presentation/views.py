@@ -13,7 +13,7 @@ from utils import github_login_required
 
 @github_login_required
 def choose(request):
-    request.ghuser.fetch_repos()
+    request.ghuser.fetch_repos(delay=True)
     
     return render_to_response('presentation_choose.html', {
         'ghuser': request.ghuser,

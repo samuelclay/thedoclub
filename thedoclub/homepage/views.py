@@ -9,7 +9,6 @@ from oauth.models import GitHubUser
 from event.models import Event
 
 def home(request):
-    
     event = Event.objects.all()[0]
     secret_token = request.COOKIES.get('doclub_sessionid')
     attending = False
@@ -18,9 +17,8 @@ def home(request):
         try:
             user = GitHubUser.objects.get(secret_token=secret_token)
             attending = event.attendees.filter(id=user.id).exists()
-            
         except GitHubUser.DoesNotExist:
-            user = None
+            pass
     
     return render_to_response('homepage.html', {
         'settings': settings,
