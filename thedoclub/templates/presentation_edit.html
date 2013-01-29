@@ -4,6 +4,7 @@
 {% block content %}
 
 <div class="slide-editor">
+    {% csrf_token %}
     {% for slide in presentation.slides.all %}
     <div class="slide">
         <div class="editor">

@@ -1,3 +1,4 @@
+import json
 import bcrypt
 import datetime
 import iso8601
@@ -72,6 +73,9 @@ class GitHubUser(models.Model):
         for org in orgs:
             org_repos = gh.orgs(org['login']).repos.get()
             GitHubRepo.create(self, org_repos, org=org)
+        
+        for repo in self.repos.all():
+            repo.fetch_languages()
 
 class GitHubRepo(models.Model):
     user = models.ForeignKey(GitHubUser, related_name='repos')
@@ -85,6 +89,7 @@ class GitHubRepo(models.Model):
     watchers = models.IntegerField(null=True)
     forks = models.IntegerField(null=True)
     pushed_at = models.DateTimeField(null=True)
+    languages = models.CharField(max_length=1024, null=True)
     
     class Meta:
         ordering = ['organization_name', '-pushed_at']
@@ -120,3 +125,16 @@ class GitHubRepo(models.Model):
                 "name": repo['name'],
             })
     
+    def fetch_languages(self):
+        gh = self.user.gh()
+        
+        languages = gh.repos('%s/%s' % (self.organization_name or self.user.login, self.name)).languages.get()
+        total = sum(languages.values()) * 1.0
+        languages_list = [(lang, score / total) for lang, score in languages.items()]
+        languages_list = sorted(languages_list, key=lambda l: l[1], reverse=True)[:3]
+        self.languages = json.dumps(languages_list)
+        self.save()
+    
+    @property
+    def language_list(self):
+        return json.loads(self.languages)

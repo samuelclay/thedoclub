@@ -27,7 +27,14 @@ class Presentation(models.Model):
                     "presentation": self,
                 })
                 slide.save()
-
+    
+    def save_slides(self, slides):
+        for s, slide_data in enumerate(slides):
+            slide, _ = Slide.objects.get_or_create(presentation=self, order=s+1)
+            slide.content = slide_data[0]
+            slide.html = slide_data[1]
+            slide.save()
+        
     def __unicode__(self):
         return "%s: %s" % (self.user, self.repo)
 
