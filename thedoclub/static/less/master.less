@@ -172,7 +172,7 @@ footer {
     margin: 24px 0 0;
     padding: 36px 0;
     background-color: black;
-    border-top: 1px solid rgba(0, 0, 0, .1);
+    border-top: 5px solid #546B79;
     
     .about {
         float: left;
@@ -268,6 +268,11 @@ footer {
             font-size: .85em;
         }
         h1, h2, h3, h4, h5, h6 {
+            
+            &:first-child {
+                margin-top: 0;
+            }
+            
             img {
                 max-height: 2em;
                 max-width: 2em;
