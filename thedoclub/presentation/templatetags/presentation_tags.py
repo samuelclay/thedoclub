@@ -4,4 +4,4 @@ register = template.Library()
 
 @register.filter
 def percentage(decimal):
-    return "%s%%" % int(round(decimal*100))
+    return "%s%%" % max(1, int(round(decimal*100)))
