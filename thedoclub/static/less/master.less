@@ -168,17 +168,28 @@ section {
 /* = Presentation Editor = */
 /* ======================= */
 
-.slide-editor {
+.slide {
+    margin: 0 0 48px 0;
+    overflow: hidden;
     
     .editor {
         clear: both;
         float: left;
-        width: 50%;
+        width: 44%;
         
         textarea {
             width: 100%;
             height: 280px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
         }
+    }
+    
+    .preview {
+        float: left;
+        width: 44%;
+        margin: 0 0 0 24px;
     }
     
 }
