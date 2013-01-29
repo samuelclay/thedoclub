@@ -1,11 +1,10 @@
 {% extends "base.html" %}
 
+
 {% block content %}
 
-Edit: {{ repo }} -- {{ presentation }}
-
 <div class="slide-editor">
-{% for slide in presentation.slides.all %}
+    {% for slide in presentation.slides.all %}
     <div class="slide">
         <div class="editor">
             <textarea name="slide_{{ slide.order }}">{{ slide.content }}</textarea>
@@ -14,13 +13,13 @@ Edit: {{ repo }} -- {{ presentation }}
             {{ slide.html }}
         </div>
     </div>
-{% endfor %}
+    {% endfor %}
 </div>
 
-    
 {% endblock %}
 
+
 {% block js %}
-<script src="/static/js/marked.js" type="text/javascript" charset="utf-8"></script>
-<script src="/static/js/presentation_edit.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/js/marked.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/js/presentation_edit.js" type="text/javascript" charset="utf-8"></script>
 {% endblock %}
