@@ -1,4 +1,4 @@
-# Code Sample
+### Code Sample
 
 ##### Sample title
 ```
