@@ -39,3 +39,4 @@ nosetests.xml
 dev_settings.py
 prod_settings.py
 logs
+include
