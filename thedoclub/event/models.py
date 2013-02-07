@@ -1,17 +1,21 @@
 from django.db import models
 from oauth.models import GitHubRepo, GitHubUser
-
-# Create your models here.
+from presentation.models import Presentation
 
 
 class Event(models.Model):
     starts_at = models.DateTimeField(null=True)
     location = models.CharField(max_length=255, null=True)
     attendees = models.ManyToManyField(GitHubUser)
-    repos = models.ManyToManyField(GitHubRepo)
+    presentations = models.ManyToManyField(Presentation)
     
     class Meta:
         ordering = ['-starts_at']
     
     def __unicode__(self):
-        return "%s: %s" % (self.starts_at, self.location)
+        return "%s: %s (%s attendees, %s presentations)" % (
+            self.starts_at.strftime('%Y-%m-%d'), 
+            self.location,
+            self.attendees.count(),
+            self.presentations.count(),
+        )

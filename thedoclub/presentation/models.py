@@ -13,10 +13,15 @@ class Presentation(models.Model):
     user = models.ForeignKey(GitHubUser, related_name="presentations")
     repo = models.OneToOneField(GitHubRepo, null=True)
     title = models.CharField(max_length=255)
+    description = models.CharField(max_length=1024)
     created = models.DateTimeField(auto_now_add=True)
     is_submitted = models.BooleanField(default=False)
     
     def build_slides(self):
+        self.title = self.repo.name
+        self.description = self.repo.description
+        self.save()
+        
         for slide_number in range(5):
             slide_number += 1
             slide, _ = Slide.objects.get_or_create(presentation=self, order=slide_number)

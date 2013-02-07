@@ -25,7 +25,7 @@
         </div>
         <div class="span7">
             <ul class="attendees">
-                {% for attendee in event.attendees.all %}
+                {% for attendee in coming_event.attendees.all %}
                 <li>
                     <a href="https://github.com/{{ attendee.login }}" target="_blank">
                         <img src="{{ attendee.avatar_url }}" width="60" height="60" title="{{ attendee.name }}" />
@@ -48,60 +48,44 @@
 <section class="changelog">
     <a id="changelog"></a>
     <h2>Changelog</h2>
-    <p class="what">Everything that's gone on before, in reverse chronological order.</p>
+
+    {% for event in events %}
+        <a id="changelog-2013-02-01"></a>
+        <h3 class="what">
+            {{ event.starts_at|date:"l, F jS, Y" }}
+            <span class="pull-right location">{{ event.location }}</span>
+        </h3>
         
-    <a id="changelog-2013-02-01"></a>
-    <h3>2013.02.01</h3>
-        
-    <article>
-        <div class="row">
-            <header class="clearfix span9">
-                <h4>Project Heading <span class="by">by githubname</span></h4>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut </p>
-            </header>
-            <div class="span3">
-                <div class="actions">
-                <iframe src="http://ghbtns.com/github-btn.html?user=markdotto&repo=github-buttons&type=watch"
-              allowtransparency="true" frameborder="0" scrolling="0" width="60" height="20"></iframe>
-                <iframe src="http://ghbtns.com/github-btn.html?user=markdotto&type=follow"
-                allowtransparency="true" frameborder="0" scrolling="0" width="132" height="20"></iframe>
+        {% for presentation in event.presentations.all %}
+            <article>
+                <div class="row">
+                    <header class="clearfix">
+                        <div class="span3 pull-right">
+                            <div class="actions">
+                                <iframe src="http://ghbtns.com/github-btn.html?user={{ presentation.user.login }}&amp;repo={{ presentation.repo.name }}&amp;type=watch"
+                                    allowtransparency="true" frameborder="0" scrolling="0" width="60"
+                                    height="20"></iframe>
+                                <iframe src="http://ghbtns.com/github-btn.html?user={{ presentation.user.login }}&amp;type=follow"
+                                    allowtransparency="true" frameborder="0" scrolling="0" width="132"
+                                    height="20"></iframe>
+                            </div>
+                        </div>
+
+                        <h4>{{ presentation.title }} <span class="by">by {{ presentation.user.login }}</span></h4>
+                        <p class="description">{{ presentation.description }}</p>
+                    </header>
                 </div>
-            </div>
-        </div>
-            
-        <ol class="slides">
-            <li><div class="slide"></a></li>
-            <li><div class="slide"></a></li>
-            <li><div class="slide"></a></li>
-            <li><div class="slide"></a></li>
-            <li><div class="slide"></a></li>
-        </ol>
-    </article>
-        
-    <article>
-        <div class="row">
-            <header class="clearfix span9">
-                <h4>Project Heading <span class="by">by githubname</span></h4>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut </p>
-            </header>
-            <div class="span3">
-                <div class="actions">
-                <iframe src="http://ghbtns.com/github-btn.html?user=markdotto&repo=github-buttons&type=watch"
-              allowtransparency="true" frameborder="0" scrolling="0" width="60" height="20"></iframe>
-                <iframe src="http://ghbtns.com/github-btn.html?user=markdotto&type=follow"
-                allowtransparency="true" frameborder="0" scrolling="0" width="132" height="20"></iframe>
+                
+                <div class="slides-container">
+                    <ol class="slides">
+                        {% for slide in presentation.slides.all %}
+                            <li class="slide"><div class="slide-html">{{ slide.html|safe }}</div></li>
+                        {% endfor %}
+                    </ol>
                 </div>
-            </div>
-        </div>
-            
-        <ol class="slides">
-            <li><div class="slide"></a></li>
-            <li><div class="slide"></a></li>
-            <li><div class="slide"></a></li>
-            <li><div class="slide"></a></li>
-            <li><div class="slide"></a></li>
-        </ol>
-    </article>
+            </article>
+        {% endfor %}
+    {% endfor %}
 </section>
     
 {% endblock content %}

@@ -3,19 +3,19 @@
 
 {% block content %}
 
-<div class="slide-editor">
+<ol class="slides-editor">
     {% csrf_token %}
     {% for slide in presentation.slides.all %}
-    <div class="slide">
-        <div class="editor">
+    <li class="slide-editor">
+        <div class="slide-markdown">
             <textarea name="slide_{{ slide.order }}">{{ slide.content }}</textarea>
         </div>
-        <div class="preview">
-            {{ slide.html }}
+        <div class="slide-html slide-preview">
+            {{ slide.html|safe }}
         </div>
-    </div>
+    </li>
     {% endfor %}
-</div>
+</ol>
 
 {% endblock %}
 
