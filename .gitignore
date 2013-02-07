@@ -38,3 +38,4 @@ nosetests.xml
 # The Do Club
 dev_settings.py
 prod_settings.py
+logs
