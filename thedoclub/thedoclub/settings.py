@@ -166,7 +166,7 @@ LOGGING = {
 BROKER_URL = 'redis://localhost:6379/5'
 import djcelery
 djcelery.setup_loader()
-CELERY_CONCURRENCY = 2
+CELERYD_CONCURRENCY = 2
 
 if '/Users' in os.getcwd():
     PROD = False
