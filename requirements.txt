@@ -7,6 +7,7 @@ billiard==2.7.3.19
 celery==3.0.13
 celery-with-redis==3.0
 django-celery==3.0.11
+django-extensions==1.0.3
 iso8601==0.1.4
 kombu==2.5.4
 py-bcrypt==0.2

@@ -26,7 +26,8 @@ def authorize(request):
     response = HttpResponseRedirect(url)
     
     if next:
-        response.set_cookie('oauth_next', next)
+        response.set_cookie('oauth_next', next, 
+                            domain=settings.SESSION_COOKIE_DOMAIN)
         
     return response
     
