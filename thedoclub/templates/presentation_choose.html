@@ -14,7 +14,11 @@
                 <p>{{ repo.description }}</p>
                 
                 {% if repo.presentation %}
-                in progress
+                    {% if repo.presentation.is_submitted %}
+                        submitted
+                    {% else %}
+                        in progress
+                    {% endif %}
                 {% endif %}
             </a>
         </li>

@@ -67,13 +67,20 @@ DC.PresentationEditor.prototype = {
 };
 
 $(document).ready(function() {
-    
+    var slides = [];
     console.log(["Slides", $('.slide-editor')]);
     $('.slide-editor').each(function() {
         console.log(["Init slide editor", this]);
-        new DC.PresentationEditor({
+        slides.push(new DC.PresentationEditor({
             '$el': $(this)
-        });
+        }));
     });
 
+    $("input[name=submit]").on('click', function() {
+        var data = DC.PresentationEditor.prototype.serialize();
+        data['submit'] = true;
+        $.post(window.location.href, data, function() {
+            window.location.href = "/presentation/choose";
+        });
+    });
 });
