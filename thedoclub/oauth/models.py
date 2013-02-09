@@ -104,6 +104,7 @@ class GitHubUser(models.Model):
 
 class GitHubRepo(models.Model):
     user = models.ForeignKey(GitHubUser, related_name='repos')
+    owner_name = models.CharField(max_length=255, null=True)
     organization_id = models.IntegerField(null=True)
     organization_name = models.CharField(max_length=255, null=True)
     avatar_url = models.CharField(max_length=1024, null=True)
@@ -143,6 +144,7 @@ class GitHubRepo(models.Model):
                 "repo_id": repo['id'],
                 "name": repo['name'],
             })
+            ghrepo.owner_name = org_name or repo['owner']['login']
             ghrepo.description = repo['description']
             ghrepo.html_url = repo['html_url']
             ghrepo.watchers = repo['watchers']
@@ -154,7 +156,7 @@ class GitHubRepo(models.Model):
     def fetch_languages(self):
         gh = self.user.gh()
         
-        languages = gh.repos('%s/%s' % (self.organization_name or self.user.login, self.name)).languages.get()
+        languages = gh.repos('%s/%s' % (self.owner_name, self.name)).languages.get()
         total = sum(languages.values()) * 1.0
         languages_list = [(lang, score / total) for lang, score in languages.items()]
         languages_list = sorted(languages_list, key=lambda l: l[1], reverse=True)[:3]
