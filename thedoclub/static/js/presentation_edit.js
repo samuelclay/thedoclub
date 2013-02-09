@@ -53,7 +53,7 @@ DC.PresentationEditor.prototype = {
             "csrfmiddlewaretoken": $("input[name=csrfmiddlewaretoken]").val()
         };
         
-        $(".slide").each(function() {
+        $(".slide-editor").each(function() {
             var text = self.slideText(this);
             var html = self.slideHtml(this);
             data["slides"].push([text, html]);
