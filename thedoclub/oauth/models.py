@@ -149,7 +149,7 @@ class GitHubRepo(models.Model):
             ghrepo.html_url = repo['html_url']
             ghrepo.watchers = repo['watchers']
             ghrepo.forks = repo['forks']
-            ghrepo.avatar_url = avatar_url
+            ghrepo.avatar_url = repo['owner']['avatar_url']
             ghrepo.pushed_at = iso8601.parse_date(repo['pushed_at']).replace(tzinfo=None)
             ghrepo.save()
     
