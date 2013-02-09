@@ -7,7 +7,7 @@
 
 ### Background
  
- * {{ user.name }}
- * {% if user.blog %}[{{ user.blog }}]({{ user.blog }}) / {% endif %}[@twitterName](http://twitter.com/thedoclub)
+ * {{ user.name }} &middot; [{{ user.email }}](mailto:{{ user.email }})
+ * {% if user.blog %}[{{ user.blog }}]({{ user.blog }}) &middot; {% endif %}[@twitterName](http://twitter.com/thedoclub)
  * {% if user.bio %}{{ user.bio }}{% else %}[Your one-line bio -- job, projects, etc]{% endif %}
  

@@ -4,6 +4,7 @@ DC.PresentationEditor = function(options) {
     this.options = options || {};
     this.$el = this.options.$el;
     
+    console.log(["PresentationEditor", options, this.$el]);
     this.initialize();
 };
 
@@ -19,7 +20,7 @@ DC.PresentationEditor.prototype = {
         options = options || {};
         console.log(["renderPreview", options]);
         var slideHtml = this.slideHtml(this.$el);
-        $(".preview", this.$el).html(slideHtml);
+        $(".slide-preview", this.$el).html(slideHtml);
         if (!options.skip_save) {
             this._throttleSave();
             this._debounceSave();
@@ -52,7 +53,7 @@ DC.PresentationEditor.prototype = {
             "csrfmiddlewaretoken": $("input[name=csrfmiddlewaretoken]").val()
         };
         
-        $(".slide").each(function() {
+        $(".slide-editor").each(function() {
             var text = self.slideText(this);
             var html = self.slideHtml(this);
             data["slides"].push([text, html]);
@@ -66,11 +67,20 @@ DC.PresentationEditor.prototype = {
 };
 
 $(document).ready(function() {
-
-    $('.slide').each(function() {
-        new DC.PresentationEditor({
+    var slides = [];
+    console.log(["Slides", $('.slide-editor')]);
+    $('.slide-editor').each(function() {
+        console.log(["Init slide editor", this]);
+        slides.push(new DC.PresentationEditor({
             '$el': $(this)
-        });
+        }));
     });
 
+    $("input[name=submit]").on('click', function() {
+        var data = DC.PresentationEditor.prototype.serialize();
+        data['submit'] = true;
+        $.post(window.location.href, data, function() {
+            window.location.href = "/presentation/choose";
+        });
+    });
 });

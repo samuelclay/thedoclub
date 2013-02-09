@@ -36,6 +36,10 @@ def edit(request, repo_id):
     if request.method == "POST":
         slides = json.loads(request.POST["slides"])
         repo.presentation.save_slides(slides)
+        
+        if request.POST.get('submit'):
+            repo.presentation.is_submitted = True
+            repo.presentation.save()
     
     return render_to_response('presentation_edit.html', {
         'presentation': repo.presentation,

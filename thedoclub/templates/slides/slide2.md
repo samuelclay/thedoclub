@@ -1,3 +1,3 @@
 ## Screenshots / Demo
 
-![Title of screenshot](http://cl.ly/MUOJ/Screen%20Shot%202013-01-28%20at%20Jan%2028%207.59.56%20PM.png)
+![Title of screenshot](http://cl.ly/Mndf/Screen%20Shot%202013-02-09%20at%20Feb%209%201.11.20%20PM.png)

@@ -14,9 +14,13 @@
                         <img src="{{ repo.avatar_url }}" />
                         <h3>{{ repo.name }}</h3>
                         <p>{{ repo.description }}</p>
-                
+                        
                         {% if repo.presentation %}
-                        <span class="inprogress">in progress</span>
+                            {% if repo.presentation.is_submitted %}
+                            <span class="submitted">submitted</span>
+                            {% else %}
+                            <span class="inprogress">in progress</span>
+                            {% endif %}
                         {% endif %}
                     </a>
                 </li>
