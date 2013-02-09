@@ -76,12 +76,14 @@
                     </header>
                 </div>
                 
-                <div class="slides-container">
-                    <ol class="slides">
-                        {% for slide in presentation.slides.all %}
-                            <li class="slide"><div class="slide-html">{{ slide.html|safe }}</div></li>
-                        {% endfor %}
-                    </ol>
+                <div class="slides-zoom">
+                    <div class="slides-container">
+                        <ol class="slides">
+                            {% for slide in presentation.slides.all %}
+                                <li class="slide"><div class="slide-html">{{ slide.html|safe }}</div></li>
+                            {% endfor %}
+                        </ol>
+                    </div>
                 </div>
             </article>
         {% endfor %}
