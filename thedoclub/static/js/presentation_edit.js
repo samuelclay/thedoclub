@@ -4,6 +4,7 @@ DC.PresentationEditor = function(options) {
     this.options = options || {};
     this.$el = this.options.$el;
     
+    console.log(["PresentationEditor", options, this.$el]);
     this.initialize();
 };
 
@@ -19,7 +20,7 @@ DC.PresentationEditor.prototype = {
         options = options || {};
         console.log(["renderPreview", options]);
         var slideHtml = this.slideHtml(this.$el);
-        $(".preview", this.$el).html(slideHtml);
+        $(".slide-preview", this.$el).html(slideHtml);
         if (!options.skip_save) {
             this._throttleSave();
             this._debounceSave();
@@ -66,8 +67,10 @@ DC.PresentationEditor.prototype = {
 };
 
 $(document).ready(function() {
-
-    $('.slide').each(function() {
+    
+    console.log(["Slides", $('.slide-editor')]);
+    $('.slide-editor').each(function() {
+        console.log(["Init slide editor", this]);
         new DC.PresentationEditor({
             '$el': $(this)
         });
