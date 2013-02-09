@@ -28,6 +28,14 @@
                         window.location.href = data.next || "{{ next }}" || "/";
                     }
                 }
+                if (data.failed_user_fetch) {
+                    $(".bar").hide();
+                    $(".repo-count").html("Oh no! There was an error when trying to fetch your GitHub user info. <a href=\"{% url oauth-authorize %}\">Try again</a>.");
+                }
+                if (data.failed_repo_fetch) {
+                    $(".bar").hide();
+                    $(".repo-count").html("Oh no! There was an error when trying to fetch your GitHub repositories. <a href=\"{% url oauth-authorize %}\">Try again</a>.");
+                }
             });
         };
         _.delay(function() {

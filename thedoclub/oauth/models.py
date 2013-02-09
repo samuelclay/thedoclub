@@ -22,6 +22,8 @@ class GitHubUser(models.Model):
     name = models.CharField(max_length=128, null=True)
     public_repos = models.IntegerField(null=True)
     repo_refresh_date = models.DateTimeField(null=True)
+    failed_user_fetch = models.BooleanField(default=False)
+    failed_repo_fetch = models.BooleanField(default=False)
 
     def __unicode__(self):
         return "%s" % (self.login)
@@ -39,47 +41,66 @@ class GitHubUser(models.Model):
         return GitHub(access_token=self.access_token)
     
     def fetch_user_info(self):
-        gh = self.gh()
-        user = gh.user.get()
+        try:
+            gh = self.gh()
+            user = gh.user.get()
+            
+            self.failed_user_fetch = False
+            self.avatar_url = user['avatar_url']
+            self.bio = user['bio']
+            self.blog = user['blog']
+            self.email = user['email']
+            self.followers = user['followers']
+            self.following = user['following']
+            self.hireable = user['hireable']
+            self.github_id = user['id']
+            self.location = user['location']
+            self.login = user['login']
+            self.name = user['name']
+            self.public_repos = user['public_repos']
         
-        self.avatar_url = user['avatar_url']
-        self.bio = user['bio']
-        self.blog = user['blog']
-        self.email = user['email']
-        self.followers = user['followers']
-        self.following = user['following']
-        self.hireable = user['hireable']
-        self.github_id = user['id']
-        self.location = user['location']
-        self.login = user['login']
-        self.name = user['name']
-        self.public_repos = user['public_repos']
-        
-        self.save()
+            self.save()
+        except Exception, e:
+            print " ***> Failed user fetch: %s / %s" % (self, e)
+            self.failed_user_fetch = True
+            self.save()
     
     def fetch_repos(self, force=False, delay=False):
-        gh = self.gh()
+        try:
+            gh = self.gh()
         
-        day_ago = datetime.datetime.now() - datetime.timedelta(days=1)
-        if not force and self.repo_refresh_date and self.repo_refresh_date > day_ago:
-            return
+            day_ago = datetime.datetime.now() - datetime.timedelta(days=1)
+            if not force and self.repo_refresh_date and self.repo_refresh_date > day_ago:
+                return
         
-        if delay and not force:
-            # FetchRepos.apply_async(kwargs={"login": self.login})
-            return
+            if delay and not force:
+                # FetchRepos.apply_async(kwargs={"login": self.login})
+                return
             
-        user_repos = gh.user.repos.get()
-        self.repo_refresh_date = datetime.datetime.now()
-        self.save()
+            user_repos = gh.user.repos.get()
+            self.failed_repo_fetch = False
+            self.repo_refresh_date = datetime.datetime.now()
+            self.save()
         
-        GitHubRepo.create(self, user_repos)
-        orgs = gh.user.orgs.get()
-        for org in orgs:
-            org_repos = gh.orgs(org['login']).repos.get()
-            GitHubRepo.create(self, org_repos, org=org)
+            GitHubRepo.create(self, user_repos)
+            orgs = gh.user.orgs.get()
+            for org in orgs:
+                print " ---> Fetching org repos: %s / %s" % (self, org['login'])
+                org_repos = gh.orgs(org['login']).repos.get()
+                GitHubRepo.create(self, org_repos, org=org)
         
-        for repo in self.repos.all():
-            repo.fetch_languages()
+            for repo in self.repos.all():
+                print " ---> Fetching repo languages: %s / %s" % (self, repo)
+                try:
+                    repo.fetch_languages()
+                except:
+                    print " ---> Failed repo language fetch: %s" % repo
+                    pass
+        except Exception, e:
+            print " ***> Failed repo fetch: %s / %s" % (self, e)
+            self.failed_repo_fetch = True
+            self.save()
+
 
 class GitHubRepo(models.Model):
     user = models.ForeignKey(GitHubUser, related_name='repos')
@@ -99,7 +120,8 @@ class GitHubRepo(models.Model):
         ordering = ['organization_name', '-pushed_at']
         
     def __unicode__(self):
-        return "[%s] %s (%s/%s)" % (self.organization_name if self.organization_name else "---",
+        return "[%s] %s (%s/%s)" % (self.organization_name 
+                                    if self.organization_name else self.user.login,
                                     self.name, self.watchers, self.forks)
         
     @classmethod
@@ -114,20 +136,20 @@ class GitHubRepo(models.Model):
         for repo in repos:
             if repo['private']: continue
             
-            cls.objects.get_or_create(defaults={
-                "description": repo['description'],
-                "html_url": repo['html_url'],
-                "watchers": repo['watchers'],
-                "forks": repo['forks'],
-                "avatar_url": avatar_url,
-                "pushed_at": iso8601.parse_date(repo['pushed_at']).replace(tzinfo=None),
-            }, **{
+            ghrepo, _ = cls.objects.get_or_create(**{
                 "user": user,
                 "organization_id": org_id,
                 "organization_name": org_name,
                 "repo_id": repo['id'],
                 "name": repo['name'],
             })
+            ghrepo.description = repo['description']
+            ghrepo.html_url = repo['html_url']
+            ghrepo.watchers = repo['watchers']
+            ghrepo.forks = repo['forks']
+            ghrepo.avatar_url = avatar_url
+            ghrepo.pushed_at = iso8601.parse_date(repo['pushed_at']).replace(tzinfo=None)
+            ghrepo.save()
     
     def fetch_languages(self):
         gh = self.user.gh()
@@ -139,6 +161,10 @@ class GitHubRepo(models.Model):
         self.languages = json.dumps(languages_list)
         self.save()
     
+    def clear_languages(self):
+        self.languages = None
+        self.save()
+        
     @property
     def language_list(self):
         return json.loads(self.languages)

@@ -42,10 +42,13 @@ def callback(request):
         return HttpResponseRedirect(reverse('oauth-authorize'))
     
     user, _ = GitHubUser.objects.get_or_create(access_token=access_token)
+    for repo in user.repos.all():
+        repo.clear_languages()
     github_fetcher.delay(access_token=access_token)
 
     response = HttpResponseRedirect(reverse("oauth-status"))
-    response.set_cookie('doclub_sessionid', user.secret_token)
+    response.set_cookie('doclub_sessionid', user.secret_token, 
+                        domain=settings.SESSION_COOKIE_DOMAIN)
     
     return response
 
@@ -69,5 +72,7 @@ def status(request):
     return HttpResponse(json.dumps({
         "repo_count": len(repos),
         "finished_repos": finished_repos,
+        "failed_user_fetch": request.ghuser.failed_user_fetch,
+        "failed_repo_fetch": request.ghuser.failed_repo_fetch,
         "next": next,
     }), mimetype="application/json")
