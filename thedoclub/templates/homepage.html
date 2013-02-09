@@ -3,13 +3,20 @@
 {% block content %}
 
 <section class="upcoming">
+    <div class="container">
+    
     <a id="upcoming"></a>
     <h2 class="hide">Upcoming</h2>
-    <p class="what">The Do Club is a meetup for people who code interesting things to present their work and gain recognition. Come meet like-minded folk and learn about great open source projects big and small.</p>
-        
     <div class="row">
-        <div class="span5">
-            <h3>Next event: 1st February 2012</h3>
+    
+        <div class="span5 what">
+            <h2>Share <span class="amp">&amp;</span> Present</h2>
+            <p>The Do Club is a meetup for people who code interesting things to present their work and gain recognition.</p>
+            <p>Come meet like-minded folk and learn about great open source projects big and small.</p>
+        </div>
+        
+        <div class="span6 offset1">
+            <h3>Next event: 1st March 2013</h3>
             <h4>at Google San Francisco</h4>
             
             {% if attending %}
@@ -19,11 +26,9 @@
                     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
                 </div>
             {% else %}
-                <a href="/event/attend" class="btn btn-primary btn-large">I'll Be There!</a>
-                <p class="note">(Sign in with Github)</p>
+                <a href="/event/attend" class="btn btn-primary btn-large"><img src="/static/img/github.png"/> I'll Be There!</a>
             {% endif %}
-        </div>
-        <div class="span7">
+
             <ul class="attendees">
                 {% for attendee in coming_event.attendees.all %}
                 <li>
@@ -35,17 +40,22 @@
             </ul>
         </div>
     </div>
-        
+    </div>
 </section>
 <section class="present">
-    <a id="present"></a>
-    <h2>Present</h2>
-    <p class="what">Got something to show off at the next event? Each presentation is around 10 minutes <strong>(5 slides)</strong> and we've made it as easy as possible to take part - don't worry if you've never presented anything before!</p>
-        
-    <a href="{% url presentation-choose %}" class="btn btn-primary btn-large">Present Your Project</a>
+    <div class="container">
     
+    <a id="present"></a>
+    <h2>Show Your Project</h2>
+    <p class="what">Got something to show off at the next event? Each presentation is around 10 minutes <strong>(5 slides)</strong> and we've made it as easy as possible to take part - we'll even setup the slides and prefill information from your GitHub account, smart huh?</p>
+        
+    <a href="{% url presentation-choose %}" class="btn btn-primary btn-large"><img src="/static/img/github.png"/> Create a Presentation</a>
+    
+    </div>
 </section>
 <section class="changelog">
+    <div class="container">
+    
     <a id="changelog"></a>
     <h2>Changelog</h2>
 
@@ -88,6 +98,7 @@
             </article>
         {% endfor %}
     {% endfor %}
+</div>
 </section>
     
 {% endblock content %}

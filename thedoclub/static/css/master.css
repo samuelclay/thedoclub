@@ -1,13 +1,14 @@
 
 h1,h2,h3,h4,h5 .h1,.h2,.h3,.h4,.h5{font-weight:normal;}
-section{margin-bottom:60px;}
+section{margin-bottom:30px;}
 .heading nav{margin-top:56px;text-align:right;}.heading nav li{display:inline;}.heading nav li a{padding:10px 0 0 60px;font-weight:bold;}
-.what{color:#555;font-size:20px;line-height:1.2;text-align:justify;margin:0 -5px 10px -5px;padding:10px;background:#f5f5f5;}
+.what{color:#555;font-size:20px;line-height:1.2;text-align:justify;}.what h2{color:#333;font-size:50px;margin-bottom:20px;}.what h2 .amp{font-size:1.05em;font-family:"Warnock Pro","Goudy Old Style","Palatino","Book Antiqua",serif;font-style:italic;}
 .note{margin-top:3px;color:#999;font-size:13px;}
-.upcoming h3{margin-bottom:0;}
+.upcoming{background:#f5f5f5;padding:30px 0;}.upcoming h3{margin-bottom:0;}
 .upcoming h4{margin-top:-2px;margin-bottom:20px;color:#777;}
 .upcoming .attendees{margin:20px -10px 0 -10px;}.upcoming .attendees li{display:block;float:left;margin:0 10px 10px 0;}.upcoming .attendees li img{display:block;}
-.changelog h3{margin-bottom:0;}.changelog h3 .location{color:#A0A0A0;}
+.btn img{width:20px;height:20px;margin-right:4px;position:relative;top:-1px;}
+.changelog{background:#f5f5f5;padding:30px 0;margin:0;}.changelog h3{margin-bottom:0;}.changelog h3 .location{color:#A0A0A0;}
 .changelog article{margin-left:24px;}.changelog article h4 span{font-size:15px;color:#888;}
 .changelog article .actions{float:right;margin-top:10px;}
 .changelog .slides-zoom{transform:translate(-250px, -90px) scale(0.5);-moz-transform:translate(-250px, -90px) scale(0.5);-ms-transform:translate(-250px, -90px) scale(0.5);-webkit-transform:translate(-250px, -90px) scale(0.5);-o-transform:translate(-250px, -90px) scale(0.5);}
@@ -19,7 +20,7 @@ section{margin-bottom:60px;}
 .repos .repo h3{margin:-5px 0 0 0;color:#444;}
 .repos .repo p{color:#888;margin:-5px 0 0 0;padding-right:100px;}
 .repos .repo .inprogress{position:absolute;top:20px;right:10px;background:#dd4814;color:#fff;padding:2px 4px;}
-footer{margin:24px 0 0;padding:36px 0;background-color:black;border-top:5px solid #546B79;}footer .about{float:left;text-align:center;color:rgba(255, 255, 255, 0.3);font-size:24px;line-height:24px;padding:48px 0 0 0;}footer .about .amp{color:#666;font-size:1.05em;font-family:"Warnock Pro","Goudy Old Style","Palatino","Book Antiqua",serif;font-style:italic;}
+footer{padding:30px 0;background-color:#222;}footer .about{float:left;text-align:center;color:rgba(255, 255, 255, 0.3);font-size:24px;line-height:24px;padding:48px 0 0 0;}footer .about .amp{color:#666;font-size:1.05em;font-family:"Warnock Pro","Goudy Old Style","Palatino","Book Antiqua",serif;font-style:italic;}
 footer .about .asphora{font-size:.85em;}
 footer .about a{color:#546B79;}footer .about a:hover{color:#9ABED2;text-decoration:none;}
 footer .hicks{float:right;text-align:right;position:relative;font-family:"Helvetica Neue",Helvetica,Arial;}footer .hicks img{position:absolute;right:80px;top:30px;z-index:0;}
