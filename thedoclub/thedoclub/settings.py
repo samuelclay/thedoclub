@@ -124,6 +124,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django-extensions',
     'djcelery',
     'presentation',
     'oauth',
