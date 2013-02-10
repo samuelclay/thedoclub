@@ -5,11 +5,22 @@
 
 <section class="presentation edit">
     <div class="container">
+        <div class="presentation-meta">
+            <div class="presentation-title">
+                <label for="presentation-title">Title:</label>
+                <input type="text" id="presentation-title" name="title" value="{{ presentation.title }}">
+            </div>
+            <div class="presentation-description">
+                <label for="presentation-description">Description:</label>
+                <input type="text" id="presentation-description" name="description" value="{{ presentation.description }}">
+            </div>
+        </div>
+        
         <ol class="slides-editor">
             {% csrf_token %}
             {% for slide in presentation.slides.all %}
             <li class="slide-editor">
-                <h2>Slide {{ slide.order }}</h2>
+                <h2 class="slide-count">Slide {{ slide.order }} <div class="saved">Saved</div></h2>
                 <div class="slide-markdown">
                     <textarea name="slide_{{ slide.order }}">{{ slide.content }}</textarea>
                 </div>

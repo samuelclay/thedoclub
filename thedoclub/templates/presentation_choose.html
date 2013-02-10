@@ -12,15 +12,18 @@
                 <li>
                     <a class="repo" href="/presentation/choose/{{ repo.repo_id }}" title="Choose '{{ repo.name }}'">
                         <img src="{{ repo.avatar_url }}" />
-                        <h3>{{ repo.name }}</h3>
-                        <p>{{ repo.description }}</p>
-                        
                         {% if repo.presentation %}
+                            <h3>{{ repo.presentation.title }}</h3>
+                            <p>{{ repo.presentation.description }}</p>
+
                             {% if repo.presentation.is_submitted %}
                             <span class="submitted">submitted</span>
                             {% else %}
                             <span class="inprogress">in progress</span>
                             {% endif %}
+                        {% else %}
+                            <h3>{{ repo.name }}</h3>
+                            <p>{{ repo.description }}</p>
                         {% endif %}
                     </a>
                 </li>

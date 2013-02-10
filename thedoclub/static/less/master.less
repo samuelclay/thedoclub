@@ -302,6 +302,28 @@ footer {
     margin: 0 0 30px;
     overflow: hidden;
     
+    .slide-count .saved {
+        opacity: 0;
+        background-color: #F09537;
+        color: white;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+        float: right;
+        font-size: 12px;
+        text-transform: uppercase;
+        line-height: 16px;
+        padding: 3px 6px 2px;
+        margin-top: 18px;
+        
+        -webkit-transition: opacity .5s ease-in-out;
+        -moz-transition: opacity .5s ease-in-out;
+        -o-transition: opacity .5s ease-in-out;
+        -ms-transition: opacity .5s ease-in-out;
+        transition: opacity .5s ease-in-out;
+        
+        &.active {
+            opacity: 1;
+        }
+    }
     .slide-markdown {
         clear: both;
         float: left;
