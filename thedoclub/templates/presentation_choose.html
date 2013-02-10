@@ -10,7 +10,7 @@
         <ul class="repos">
             {% for repo in ghuser.repos.all %}
                 <li>
-                    <a class="repo" href="/presentation/choose/{{ repo.repo_id }}" title="Choose '{{ repo.name }}'">
+                    <a class="repo" href="/presentation/choose/{{ repo.repo_id }}">
                         <img src="{{ repo.avatar_url }}" />
                         {% if repo.presentation %}
                             <h3>{{ repo.presentation.title }}</h3>

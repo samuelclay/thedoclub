@@ -31,7 +31,7 @@ def choose_confirm(request, repo_id):
 
 @github_login_required
 def edit(request, repo_id):
-    repo = get_object_or_404(GitHubRepo, repo_id=repo_id)
+    repo = get_object_or_404(GitHubRepo, repo_id=repo_id, user=request.ghuser)
     
     if request.method == "POST":
         slides = json.loads(request.POST["slides"])
