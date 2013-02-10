@@ -19,9 +19,12 @@ DC.PresentationEditor = Backbone.View.extend({
         var self = this;
         
         this.slides = $('.slide-editor').map(function() {
-            return new DC.PresentationSlideEditor({
+            var slide = new DC.PresentationSlideEditor({
                 el: this
             });
+            slide.renderPreview({skip_save: true});
+
+            return slide;
         });
     },
     
@@ -88,13 +91,16 @@ DC.PresentationSlideEditor = Backbone.View.extend({
         this._debounceSave = _.debounce(this.save, 5000);
     },
     
-    renderPreview: function() {
+    renderPreview: function(options) {
+        options = options || {};
         var slideHtml = this.slideHtml();
         this.$(".slide-preview").html(slideHtml);
-        console.log(["renderPreview", slideHtml]);
-        this._throttleSave();
-        this._debounceSave();
-        this.$(".saved").removeClass('active');
+        
+        if (!options.skip_save) {
+            this._throttleSave();
+            this._debounceSave();
+            this.$(".saved").removeClass('active');
+        }
     },
     
     save: function() {
