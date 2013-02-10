@@ -22,7 +22,7 @@ def choose(request):
 
 @github_login_required
 def choose_confirm(request, repo_id):
-    repo = get_object_or_404(GitHubRepo, repo_id=repo_id)
+    repo = get_object_or_404(GitHubRepo, repo_id=repo_id, user=request.ghuser)
     
     presentation, _ = Presentation.objects.get_or_create(user=request.ghuser, repo=repo)
     presentation.build_slides()
