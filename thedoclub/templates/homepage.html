@@ -2,22 +2,22 @@
 
 {% block content %}
 
-<section class="upcoming">
+<section class="upcoming" itemscope itemtype="http://schema.org/Event">
     <div class="container">
     
     <a id="upcoming"></a>
-    <h2 class="hide">Upcoming</h2>
+    <h2 class="hide" itemprop="name">The Do Club</h2>
     <div class="row">
     
-        <div class="span5 what">
+        <div class="span5 what" itemprop="description">
             <h2>Share <span class="amp">&amp;</span> Present</h2>
             <p>The Do Club is a meetup for people who code interesting things to present their work and gain recognition.</p>
             <p>Come meet like-minded folk and learn about great open source projects big and small.</p>
         </div>
         
         <div class="span6 offset1">
-            <h3>Next event: 1st March 2013</h3>
-            <h4>at Google San Francisco</h4>
+            <h3>Next event: <span itemprop="startDate">1st March 2013</span></h3>
+            <h4>at Google, San Francisco</h4>
             
             {% if attending %}
                 <p>You're going! Fancy telling other people about it?</p>
@@ -31,9 +31,10 @@
 
             <ul class="attendees">
                 {% for attendee in coming_event.attendees.all %}
-                <li>
-                    <a href="https://github.com/{{ attendee.login }}" target="_blank">
-                        <img src="{{ attendee.avatar_url }}" width="60" height="60" title="{{ attendee.name }}" />
+                <li itemscope itemprop="attendee" itemtype="http://schema.org/Person">
+                    <a href="https://github.com/{{ attendee.login }}" target="_blank" itemprop="url">
+                        <img src="{{ attendee.avatar_url }}" width="60" height="60" title="{{ attendee.name }}" itemprop="image" />
+                        <meta itemprop="name" content="{{ attendee.name }}">
                     </a>
                 </li>
                 {% endfor %}

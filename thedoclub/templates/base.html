@@ -3,11 +3,13 @@
 <html>
 <head>
     <meta charset="utf-8">
-    
     <title>{% block title %}The Do Club - San Francisco{% endblock %}</title>
     
     <link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8" />
-    <meta name="description" content="">
+    <meta name="description" content="The Do Club is a meetup for people who code interesting things to present their work and gain recognition.">
+    <meta property="og:type" content="event">
+    <meta property="og:region" content="CA">
+    <meta property="og:locality" content="San Francisco">
     
     {% if settings.DEBUG %}
         <link rel="stylesheet/less" type="text/css" href="/static/less/master.less" />
