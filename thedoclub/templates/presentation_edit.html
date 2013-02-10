@@ -7,12 +7,10 @@
     <div class="container">
         <div class="presentation-meta">
             <div class="presentation-title">
-                <label for="presentation-title">Title:</label>
-                <input type="text" id="presentation-title" name="title" value="{{ presentation.title }}">
+                <input type="text" name="title" value="{{ presentation.title }}" class="h2 editable" placeholder="Presentation Title" />
             </div>
             <div class="presentation-description">
-                <label for="presentation-description">Description:</label>
-                <input type="text" id="presentation-description" name="description" value="{{ presentation.description }}">
+                <input type="text" name="description" value="{{ presentation.description }}" class="description editable" placeholder="Description of project" />
             </div>
         </div>
         
@@ -33,7 +31,10 @@
         
         <h2>Finish</h2>
         <p>All done? Submit using this massive button below and We'll get in touch to let you know in plenty of time if you'll be presenting at the next event.</p>
-        <input type="button" name="submit" value="Submit Presentation" class="btn btn-primary btn-large" />
+        
+        <div class="finish">
+            <input type="button" name="submit" value="Submit Presentation" class="btn btn-primary btn-large" />
+        </div>
     </div>
 </section>
 {% endblock %}
